@@ -4,7 +4,6 @@ namespace PA3.Models
 {
     public class Song: IComparable<Song>
     {
-        // auto implemented properties
         public int SongID {get; set;}
         public string SongTitle {get; set;}
         public DateTime SongTimestamp {get; set;}

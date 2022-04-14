@@ -11,18 +11,17 @@ namespace PA3
     {
         static void Main(string[] args)
         {
-            // CreateSong.CreateSongTable();
-            int userChoice = 0;
+                        int userChoice = 0;
             bool keepGoing;
             ReadFromFile readFromFile = new ReadFromFile();
             List<Song> playlist = readFromFile.GetAll();
-            // Menu programMenu = new Menu(){SongUtilities = new SongUtil(), Playlist = playlist};
             Menu programMenu = new Menu(){SongUtilities = new SongUtilDatabase(), Playlist = playlist};
-            do {
+                do {
                 userChoice = programMenu.DisplayMainMenu(); 
                 keepGoing = programMenu.RouteMainMenu(userChoice);
-                
-            } while (keepGoing);
+                } while (keepGoing);
+
+                //Tried my hardest :-)
         }
     }
 }

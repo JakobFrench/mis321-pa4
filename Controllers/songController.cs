@@ -1,51 +1,53 @@
-namespace _321mis_pa4.Controllers;
+//namespace _321mis_pa4.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Models;
-using api.Models.Interfaces;
+using api.Controllers;
+using PA3.Models;
+using PA3.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
+
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class songController : ControllerBase
+    public class songController
     {
-        [EnableCors("AnotherPolicy")]
+        [EnableCors("Another")]
         [HttpGet]
         public List<Song> Get()
         {
-            IGetAllSongs readObject = new ReadSongData();
-            return readObject.GetAllSongs();
+            IReadSongs readObject = new GetAll();
+            return readObject.GetAll();
         }
 
-        [EnableCors("AnotherPolicy")]
-        [HttpGet("{SongID}", Name = "Get")]
+        [EnableCors("Another")]
+        [HttpGet("{SongID}", id = "fav")]
         public Song Get(int SongID)
         {
-            IGetSong readObject = new ReadSongData();
+            IReadSongs readObject = new GetAll();
             Console.WriteLine(SongID);
-            return readObject.GetSong(SongID);
+            return readObject.GetAll(SongID);
         }
 
-        [EnableCors("AnotherPolicy")]
-        [HttpPost(Name = "PostSong")]
+        [EnableCors("Another")]
+        [HttpPost(id = "add")]
         public void Post(Song song)
         {
-            IInsertSong insertObject = new AddSong();
-            insertObject.InsertSong(song);
+            ICreateSongs insertObject = new Create();
+            insertObject.Create(song);
         }
         
         [EnableCors("AnotherPolicy")]
         [HttpPut("{id}")]
         public void Put([FromBody] Song song)  //used to have [From Body] before Song
         {
-            IEditSongs editObject = new EditSongData();
-            editObject.Edit(song);
+            IUpdateSongs editObject = new Update();
+            editObject.Update(song);
         }
 
         [EnableCors("AnotherPolicy")]
